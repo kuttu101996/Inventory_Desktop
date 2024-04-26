@@ -1,0 +1,12 @@
+input {
+  border: 0;
+  outline: none;
+}
+/* input[type="number"] {
+  -mox-appearance: textfield;
+} */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

@@ -1,0 +1,5 @@
+if name === test-name then default value of selectedSuggestion state will be object else string
+if selectedSuggestion then add the data into 
+
+
+IF the input field is empty then no down key event should perform
