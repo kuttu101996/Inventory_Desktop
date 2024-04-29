@@ -96,7 +96,7 @@ function TableContent() {
                     </th>
                     <th
                       scope="col"
-                      className="px-2 py-1.5 text-left text-xs text-gray-600 w-52"
+                      className="px-2 py-1.5 text-left text-xs text-gray-600 w-96"
                       //   font-normal
                     >
                       <span>Product Name</span>
@@ -107,20 +107,6 @@ function TableContent() {
                         <FontAwesomeIcon className="text-white" icon={faPlus} />
                       </button>
                     </th>
-                    {/* Test date */}
-                    {/* <th
-                      scope="col"
-                      className="px-2 py-1.5 text-left text-xs text-gray-600 w-28"
-                    >
-                      Test Date
-                    </th> */}
-                    {/* Report Date */}
-                    {/* <th
-                      scope="col"
-                      className="px-2 py-1.5 text-left text-xs text-gray-600 w-28"
-                    >
-                      Report Date
-                    </th> */}
                     <th
                       scope="col"
                       className="px-2 py-1.5 text-left text-xs text-gray-600"
@@ -163,12 +149,6 @@ function TableContent() {
                     >
                       Amount
                     </th>
-                    {/* <th
-                      scope="col"
-                      className="px-2 py-1.5 text-left text-sm text-gray-600"
-                    >
-                      Disc.%
-                    </th> */}
                     <th scope="col" className="relative px-4 py-3.5">
                       {/* <span className="sr-only">Edit</span> */}
                     </th>

@@ -25,6 +25,16 @@ function createWindow() {
   //     })
   //   );
 
+  mainWindow.webContents.on("dom-ready", () => {
+    mainWindow.webContents.executeJavaScript(`
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    history.back(); // Navigate back to previous page
+                }
+            });
+        `);
+  });
+
   mainWindow.on("closed", function () {
     mainWindow = null;
   });

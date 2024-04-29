@@ -11,7 +11,7 @@ import { useTableState } from "../../context/TableContext";
 
 function InputSearchSuggestion({ name, placeholder, testName, id }) {
   // console.log("Rendering " + placeholder);
-  const { table, setTable } = useTableState();
+  const { table, setTable, handleDeleteRow } = useTableState();
   const [inputValue, setInputValue] = useState(testName ? testName : "");
   const [selectedSuggestion, setSelectedSuggestion] = useState(
     name === "test-name" ? {} : ""
@@ -47,6 +47,7 @@ function InputSearchSuggestion({ name, placeholder, testName, id }) {
       const currentFocus = document.activeElement;
       if ((inputValue === "" || !suggestions) && table.length <= 1) return;
 
+      // moving arround different rows with down and up.
       // IF the input field is empty then no down key event should perform
       if (
         (e.key === "ArrowUp" || e.key === "ArrowDown") &&
@@ -112,6 +113,7 @@ function InputSearchSuggestion({ name, placeholder, testName, id }) {
     inputRef.current.focus();
   }, []);
 
+  // fetching all product data from API
   useEffect(() => {
     fetch(`https://jsonplaceholder.typicode.com/${name}`)
       .then((res) => res.json())
@@ -119,9 +121,9 @@ function InputSearchSuggestion({ name, placeholder, testName, id }) {
       .catch((error) => console.log("Error fetching data: ", error));
   }, [name]);
 
+  // this condition responsible for adding data into all the columns of that row
   useEffect(() => {
     if (selectedSuggestion) {
-      // console.log(selectedSuggestion);
       if (testName !== "") {
         let updatedTable = table.map((elem) => {
           if (elem.rowId === id) {
@@ -154,6 +156,7 @@ function InputSearchSuggestion({ name, placeholder, testName, id }) {
     }
   }, [selectedSuggestion, setSelectedSuggestion]);
 
+  // setting focus to the new row
   useLayoutEffect(() => {
     let rowToFocus = document.querySelectorAll(".search-input");
     if (rowToFocus.length > 0) {
@@ -180,6 +183,25 @@ function InputSearchSuggestion({ name, placeholder, testName, id }) {
     };
   }, [handleClickOutside]);
 
+  useEffect(() => {
+    const handleShiftTab = async (e) => {
+      if (e.ctrlKey && e.key === "d" && table.length > 1) {
+        console.log(table);
+        console.log(table.length);
+        // deleting the row if the activeElement's id matches any items rowId present in the table
+        const focusRowId = document.activeElement.id;
+        const result = handleDeleteRow(focusRowId);
+        console.log(result);
+      }
+    };
+
+    document.addEventListener("keydown", handleShiftTab);
+
+    return () => {
+      document.removeEventListener("keydown", handleShiftTab);
+    };
+  }, [table, setTable]);
+
   const memoizedSuggestions = useMemo(() => suggestions || [], [suggestions]);
 
   return (
@@ -193,7 +215,7 @@ function InputSearchSuggestion({ name, placeholder, testName, id }) {
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
-        className="search-input"
+        className="search-input w-full"
         ref={inputRef}
         id={id}
       />

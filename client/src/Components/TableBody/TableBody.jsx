@@ -5,13 +5,13 @@ import InputSearchSuggestion from "../InputSearchSuggestion/InputSearchSuggestio
 import { useTableState } from "../../context/TableContext";
 
 function TableBody({ element }) {
-  const { handleDeleteRow } = useTableState();
+  const { handleDeleteRow, table } = useTableState();
   const today = new Date().toISOString().split("T")[0];
   const [selectedDate, setSelectedDate] = useState("");
 
   return (
     // <tr className="divide-x divide-gray-300">
-    <tr className="w-full">
+    <tr className="w-full" id={table.rowId}>
       {/* Sr No */}
       <td className="whitespace-nowrap">
         <div className="text-xs px-1 py-1">
@@ -23,10 +23,6 @@ function TableBody({ element }) {
             onChange={() => {}}
           />
           {/* </div> */}
-          {/* <input
-            type="text"
-            className="border border-gray-200 rounded px-2 py-1 outline-none w-48"
-          /> */}
         </div>
       </td>
       {/* Product Name */}
@@ -128,24 +124,21 @@ function TableBody({ element }) {
         </div>
       </td>
       {/* Amount */}
-      <td
-        className="whitespace-nowrap"
-        // style={{ width: "75px" }}
-      >
+      <td className="whitespace-nowrap">
         <div className="text-xs px-1 py-1 w-28">
           {/* <input
-                          type="text"
-                          readOnly
-                          className="border border-gray-200 rounded px-2 py-1 outline-none"
-                        /> */}
+            type="text"
+            readOnly
+            className="border border-gray-200 rounded px-2 py-1 outline-none"
+          /> */}
         </div>
       </td>
       {/* delete */}
       <td className="whitespace-nowrap">
-        <div className="text-xs px-1 py-1 w-16">
+        <div className="text-xs px-1 py-1 w-16 flex items-center justify-center">
           <button
-            id="row_dlt_btn"
-            className="px-1 py-1 bg-red-600 text-white rounded hover:bg-red-700"
+            id={`delete_${table.rowId}`}
+            className="px-1 py-1 bg-red-600 text-white rounded hover:bg-red-700 w-full"
             onClick={() => {
               // swal({
               //   title: "Are you sure?",

@@ -10,11 +10,6 @@ function RequiredBillInfo() {
   const [number, setNumber] = useState("");
   const [customerType, setCustomerType] = useState("Quick");
 
-  // const [urgent, setUrgent] = useState(false);
-  // const [homeCollect, setHomeCollect] = useState(false);
-  // const [homeDeliv, setHomeDeliv] = useState(false);
-  // const [passOn, setPassOn] = useState(false);
-
   const [showPhoneNumberError, setShowPhoneNumberError] = useState(false);
   const inputRef = useRef(null);
 
@@ -99,19 +94,17 @@ function RequiredBillInfo() {
         // e.shiftKey
         e.ctrlKey &&
         e.key === "Tab"
-        // ||
-        // (e.ctrlKey &&
-        //   e.key === "ArrowDown" &&
-        //   document.activeElement !== document.getElementById("grossTotal"))
       ) {
+        let rowToFocus = document.querySelectorAll(".search-input");
         e.preventDefault();
         // Check if focus is currently on RequiredBillInfo input
         if (document.activeElement === inputRef.current) {
           // Shift focus to TableBody
-          document.getElementById(`${tableLastRowID}`).focus();
+          if (rowToFocus.length > 0) {
+            rowToFocus[rowToFocus.length - 1].focus();
+          }
         } else if (
-          document.activeElement ===
-          document.getElementById(`${tableLastRowID}`)
+          document.activeElement === rowToFocus[rowToFocus.length - 1]
         ) {
           document.getElementById("grossTotal").focus();
         } else {
@@ -119,12 +112,6 @@ function RequiredBillInfo() {
           inputRef.current.focus();
         }
       } else if (e.ctrlKey && e.key === "ArrowRight") {
-        document.activeElement === document.getElementById(`${tableLastRowID}`)
-          ? document.getElementById("row_dlt_btn").focus()
-          : document.activeElement === document.getElementById("row_dlt_btn")
-          ? document.getElementById(`${tableLastRowID}`).focus()
-          : "";
-
         document.activeElement === document.getElementById("grossTotal")
           ? document.getElementById("print_prev").focus()
           : "";

@@ -72,7 +72,7 @@ function AfterTable() {
           <div className="flex items-center w-2/4">
             <input
               value={disPercent}
-              type="text"
+              type="number"
               className="border border-gray-300 border-solid p-1 rounded max-w-20 mr-1 text-right"
               onChange={(e) => setDisPercent(e.target.value)}
             />
