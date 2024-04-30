@@ -7,9 +7,11 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import Layout from "./Layout.jsx";
 import { useAuth } from "./context/AuthContext.jsx";
 import { useEffect } from "react";
-import AddOrUpdateProduct from "./Components/AddOrUpdateProduct.jsx";
-import VendorAddOrUpdate from "./Components/VendorAddOrUpdate.jsx";
-import Sales from "./Components/Sales.jsx";
+import AddOrUpdateProduct from "./Components/AddOrUpdateProduct/AddOrUpdateProduct.jsx";
+import VendorAddOrUpdate from "./Components/VendorAddOrUpdate/VendorAddOrUpdate.jsx";
+import Sales from "./Components/Sales/Sales.jsx";
+import Dashboard from "./Components/Dashboard/Dashboard.jsx";
+import { BillProvider } from "./context/BillContext.jsx";
 
 // Define your routes
 const App = () => {
@@ -28,9 +30,12 @@ const App = () => {
         <Route
           path=""
           element={
-            <TableProvider>
-              <TableContent />
-            </TableProvider>
+            <BillProvider>
+              <Dashboard />
+            </BillProvider>
+            // <TableProvider>
+            //   <TableContent />
+            // </TableProvider>
           }
         />
         <Route path="add_product" element={<AddOrUpdateProduct />} />

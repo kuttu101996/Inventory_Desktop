@@ -8,8 +8,6 @@ export function TableProvider({ children }) {
       rowId: Date.now(),
       testName: "",
       department: "",
-      testDate: "",
-      reportDateL: "",
       qty: "",
       rate: "",
       gross: "",
@@ -22,12 +20,9 @@ export function TableProvider({ children }) {
   const [tableLastRowID, setTableLastRowID] = useState(
     table.length ? table[table.length - 1].rowId : null
   );
-  // const [tableData, setTableData] = useState([]);
-  console.log(table.length, table[0].testName);
 
   const handleDeleteRow = useCallback(
     (elemId) => {
-      console.log(table.length, table[0].testName);
       let success = false;
 
       // if the table have only one column which is already empty then return false

@@ -1,14 +1,17 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import "./RequiredBillInfo.css";
 import swal from "sweetalert";
-import { useTableState } from "../../context/TableContext";
+// import { useTableState } from "../../context/TableContext";
 
-function RequiredBillInfo() {
-  const { tableLastRowID, setTableLastRowID } = useTableState();
+function RequiredBillInfo({ billNo }) {
   const [name, setName] = useState("Quick");
   const [dob, setDob] = useState("");
   const [number, setNumber] = useState("");
   const [customerType, setCustomerType] = useState("Quick");
+  let currentDate = new Date();
+  const todayDate = `${currentDate.getDate()}-${(currentDate.getMonth() + 1)
+    .toString()
+    .padStart(2, "0")}-${currentDate.getFullYear()}`;
 
   const [showPhoneNumberError, setShowPhoneNumberError] = useState(false);
   const inputRef = useRef(null);
@@ -126,7 +129,7 @@ function RequiredBillInfo() {
   }, [name, dob, number, customerType]);
 
   return (
-    <div className="pt-4 bg-gray-300 flex items-center justify-between w-full">
+    <div className="pt-4 bg-gray-300 flex justify-between w-full">
       <div className="text-xs text-gray-800 flex items-center justify-between w-2/4">
         <div className="w-2/4">
           <div className="flex flex-col px-2 mx-3 mb-1">
@@ -301,6 +304,20 @@ function RequiredBillInfo() {
             </div>
           </div>
         </div> */}
+      </div>
+
+      {/* Bill No & Date */}
+      <div className="w-2/4 flex items-start justify-end">
+        <div className="flex flex-col">
+          <div className="flex items-center min-w-56 px-2 mb-2">
+            <span className="font-bold text-sm mr-2 min-w-16">Bill No : </span>
+            <span className="text-sm text-gray-600">{billNo}</span>
+          </div>
+          <div className="px-2 flex items-center">
+            <span className="text-sm mr-2 font-bold min-w-16">Date : </span>
+            <span className="text-sm text-gray-600">{todayDate}</span>
+          </div>
+        </div>
       </div>
       {/* <div className="w-2/5"></div> */}
     </div>

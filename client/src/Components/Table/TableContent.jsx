@@ -8,9 +8,11 @@ import TableBody from "../TableBody/TableBody";
 import AfterTable from "../AfterTable/AfterTable";
 import { useTableState } from "../../context/TableContext";
 import { NavLink } from "react-router-dom";
+import { useBillState } from "../../context/BillContext";
 // import TableAmountCalculation from "../TableAmountCalculation/TableAmountCalculation";
 
 function TableContent() {
+  const { initialBillNo } = useBillState();
   const { table, setTable } = useTableState();
 
   const handleAddDoc = () => {};
@@ -78,7 +80,7 @@ function TableContent() {
         </div>
       </div>
 
-      <RequiredBillInfo />
+      <RequiredBillInfo billNo={initialBillNo} />
 
       <div className="flex flex-col">
         <div className="overflow-x-auto">

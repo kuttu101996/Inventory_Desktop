@@ -1,1 +1,8 @@
+initially the open bill will be a temp bill, user will start working on the temp bill, if the user saves a bill or hold a bill then we will save it on the bills state,
+before saving it we will copy the last bill from bills (always be empty) into another variable and place the temp bill on that place and place the new variable into the temp variable
+
+
 InputSearchSuggestion line 122 = responsible for entering data into the selected row of the table state
+
+
+when user save a bill / hold and create a new bill then need to add the table state into that bill from bills state(BillContext) 
